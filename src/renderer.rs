@@ -25,8 +25,8 @@ pub fn render(grid: &Grid, time: f32, stdout: &mut impl Write) -> std::io::Resul
         for x in 0..grid.width {
             let sin_x = (x as f32 * 0.12 + time).sin();
             let top = grid.get(x, y) + (sin_x + (y as f32 * 0.15 + time * 1.3).cos()) * 0.15;
-            let bottom = grid.get(x, y + 1)
-                + (sin_x + ((y + 1) as f32 * 0.15 + time * 1.3).cos()) * 0.15;
+            let bottom =
+                grid.get(x, y + 1) + (sin_x + ((y + 1) as f32 * 0.15 + time * 1.3).cos()) * 0.15;
 
             queue!(
                 stdout,

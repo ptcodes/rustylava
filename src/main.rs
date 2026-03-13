@@ -3,8 +3,8 @@ mod grid;
 mod renderer;
 mod simulation;
 
-use cli::Args;
 use clap::Parser;
+use cli::Args;
 use grid::Grid;
 use renderer::render;
 use simulation::{Metaball, update_balls, update_grid};
@@ -23,7 +23,6 @@ use crossterm::{
 use rand::{RngExt, rng};
 
 use crossterm::cursor::{Hide, Show};
-
 
 fn main() -> std::io::Result<()> {
     let args = Args::parse();
@@ -58,12 +57,11 @@ fn main() -> std::io::Result<()> {
     loop {
         let frame_start = Instant::now();
 
-        if poll(Duration::from_millis(1))? {
-            if let Event::Key(key) = read()? {
-                if key.code == KeyCode::Char('q') {
-                    break;
-                }
-            }
+        if poll(Duration::from_millis(1))?
+            && let Event::Key(key) = read()?
+            && key.code == KeyCode::Char('q')
+        {
+            break;
         }
 
         time += 0.03;
