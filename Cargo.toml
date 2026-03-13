@@ -1,0 +1,10 @@
+[package]
+name = "rustylava"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+crossterm = "0.29.0"
+cursor = "2.3.0"
+rand = "0.10.0"
+clap = { version = "4", features = ["derive"] }
