@@ -1,8 +1,9 @@
-# rustylava
+![demo](assets/demo.gif)
+
+# Rusty Lava
 
 A terminal lava lamp simulation using metaballs, rendered with Unicode half-block characters and true color.
 
-![demo](assets/demo.gif)
 
 ## Features
 
