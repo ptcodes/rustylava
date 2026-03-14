@@ -42,3 +42,46 @@ pub fn render(grid: &Grid, time: f32, stdout: &mut impl Write) -> std::io::Resul
 
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn lava_color_zero_is_black() {
+        let Color::Rgb { r, g, b } = lava_color(0.0) else {
+            panic!("expected Rgb variant");
+        };
+        assert_eq!((r, g, b), (0, 0, 0));
+    }
+
+    #[test]
+    fn lava_color_clamps_large_input() {
+        // v=100 * 0.35 = 35, clamped to 1.0 → same as v where v*0.35 == 1.0
+        let Color::Rgb { r: r1, g: g1, b: b1 } = lava_color(100.0) else {
+            panic!("expected Rgb variant");
+        };
+        let Color::Rgb { r: r2, g: g2, b: b2 } = lava_color(3.0) else {
+            panic!("expected Rgb variant");
+        };
+        assert_eq!((r1, g1, b1), (r2, g2, b2));
+    }
+
+    #[test]
+    fn lava_color_red_dominates_at_low_values() {
+        // At low (but nonzero) t, red > green > blue due to polynomial degrees
+        let Color::Rgb { r, g, b } = lava_color(1.0) else {
+            panic!("expected Rgb variant");
+        };
+        assert!(r >= g);
+        assert!(g >= b);
+    }
+
+    #[test]
+    fn render_writes_output() {
+        let grid = Grid::new(4, 4);
+        let mut buf: Vec<u8> = Vec::new();
+        render(&grid, 0.0, &mut buf).unwrap();
+        assert!(!buf.is_empty());
+    }
+}
