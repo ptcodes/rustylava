@@ -56,7 +56,13 @@ mod tests {
     use super::*;
 
     fn make_ball(x: f32, y: f32, vx: f32, vy: f32, radius: f32) -> Metaball {
-        Metaball { x, y, vx, vy, radius }
+        Metaball {
+            x,
+            y,
+            vx,
+            vy,
+            radius,
+        }
     }
 
     // clamp_and_bounce tests (tested via update_balls)
