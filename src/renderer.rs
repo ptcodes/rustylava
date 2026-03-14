@@ -58,10 +58,20 @@ mod tests {
     #[test]
     fn lava_color_clamps_large_input() {
         // v=100 * 0.35 = 35, clamped to 1.0 → same as v where v*0.35 == 1.0
-        let Color::Rgb { r: r1, g: g1, b: b1 } = lava_color(100.0) else {
+        let Color::Rgb {
+            r: r1,
+            g: g1,
+            b: b1,
+        } = lava_color(100.0)
+        else {
             panic!("expected Rgb variant");
         };
-        let Color::Rgb { r: r2, g: g2, b: b2 } = lava_color(3.0) else {
+        let Color::Rgb {
+            r: r2,
+            g: g2,
+            b: b2,
+        } = lava_color(3.0)
+        else {
             panic!("expected Rgb variant");
         };
         assert_eq!((r1, g1, b1), (r2, g2, b2));
